@@ -25,7 +25,7 @@ function Button({ text, onClick }) {
 function Window(props) {
   const [closed, setClosed] = useState(false);
 
-  const { title, actions, message, media, key, hidden } = props;
+  const { title, actions, message, media, key, hidden, addWindow } = props;
 
   const colors = ["#f4a61a", "#e93940", "#0170b5", "#79bd3f"];
 
@@ -48,9 +48,11 @@ function Window(props) {
 
   const [zIndex, setZIndex] = useState(10);
 
+  const isMobile = navigator.userAgentData.mobile;
+
   return closed ? null : (
     <Draggable
-      onMouseDown={() => setZIndex(Date.now() - 1665313953561)}
+      onMouseDown={() => { setZIndex(Date.now() - 1665313953561); if (addWindow && isMobile) addWindow() }}
       key={key}
     >
       <div
@@ -111,26 +113,24 @@ function Window(props) {
 }
 
 function App() {
-  const coreWindows = [
-    <Window
-      key={0}
-      message="Are you free on Saturday 22nd October at 7:30pm?"
-      actions={["YES", "OKAY"]}
-    />,
-    <Window
-      key={1}
-      title={"CONGRATULATIONS"}
-      message={`YOU are the ${1000000 + Math.round(Math.random() * 1000000)
-        }th person invited to this PARTY`}
-      actions={["CLAIM YOUR PRIZE(S)"]}
-    />,
-    <Window
-      key={2}
-      title={"Local parties in your area"}
-      message={`We found ONE good party in London (UK). Located at Flat 8 35 Hawley Road`}
-      actions={["I AM INTERESTED"]}
-    />,
-  ];
+  const [showVideo, setShowVideo] = useState(false);
+
+  const videoRef = useRef();
+
+  const ref = useRef();
+  const [windowOne, setWindowOne] = useState(null)
+  const [windowTwo, setWindowTwo] = useState(null)
+  const [windowThree, setWindowThree] = useState(null)
+  const [windowFour, setWindowFour] = useState(null)
+  const [windowFive, setWindowFive] = useState(null)
+  const [windowSix, setWindowSix] = useState(null)
+  const [windowSeven, setWindowSeven] = useState(null)
+  const [windowEight, setWindowEight] = useState(null)
+  const [windowNine, setWindowNine] = useState(null)
+  const [windowTen, setWindowTen] = useState(null)
+
+  const setWindowOptions = [setWindowOne, setWindowTwo, setWindowThree, setWindowFour, setWindowFive, setWindowSix, setWindowSeven, setWindowEight, setWindowNine, setWindowTen];
+
   const extraWindows = [
     <Window
       key={4}
@@ -152,29 +152,49 @@ function App() {
     />,
   ];
 
+  const addWindow = () => {
+    if (!document.hasFocus()) return;
+    setShowVideo(true);
+    if (videoRef.current) {
+      videoRef.current.play();
+    }
+
+    const randomWindow =
+      extraWindows[Math.floor(Math.random() * extraWindows.length)];
+
+    const setWindow = setWindowOptions[Math.floor(Math.random() * setWindowOptions.length)]
+    setWindow(randomWindow);
+  };
+
+  const coreWindows = [
+    <Window
+      addWindow={addWindow}
+      key={0}
+      message="Are you free on Saturday 22nd October at 7:30pm?"
+      actions={["YES", "OKAY"]}
+
+    />,
+    <Window
+      addWindow={addWindow}
+      key={1}
+      title={"CONGRATULATIONS"}
+      message={`YOU are the ${1000000 + Math.round(Math.random() * 1000000)
+        }th person invited to this PARTY`}
+      actions={["CLAIM YOUR PRIZE(S)"]}
+    />,
+    <Window
+      addWindow={addWindow}
+      key={2}
+      title={"Local parties in your area"}
+      message={`We found ONE good party in London (UK). Located at Flat 8 35 Hawley Road`}
+      actions={["I AM INTERESTED"]}
+    />,
+  ];
+
+
   const [windows] = useState(coreWindows.reverse());
 
-  const [showVideo, setShowVideo] = useState(false);
 
-  const [moreWindows, setMoreWindows] = useState([]);
-
-  const videoRef = useRef();
-
-  const ref = useRef();
-
-
-  const [windowOne, setWindowOne] = useState(null)
-  const [windowTwo, setWindowTwo] = useState(null)
-  const [windowThree, setWindowThree] = useState(null)
-  const [windowFour, setWindowFour] = useState(null)
-  const [windowFive, setWindowFive] = useState(null)
-  const [windowSix, setWindowSix] = useState(null)
-  const [windowSeven, setWindowSeven] = useState(null)
-  const [windowEight, setWindowEight] = useState(null)
-  const [windowNine, setWindowNine] = useState(null)
-  const [windowTen, setWindowTen] = useState(null)
-
-  const setWindowOptions = [setWindowOne, setWindowTwo, setWindowThree, setWindowFour, setWindowFive, setWindowSix, setWindowSeven, setWindowEight, setWindowNine, setWindowTen];
 
   useMountEffect(() => {
     const addWindow = () => {
