@@ -48,65 +48,69 @@ function Window(props) {
 
   const [zIndex, setZIndex] = useState(10);
 
+  const isMobile = toPX("100vw") < toPX("100vh");
 
-  return closed ? null : (
+  const windowContent = <div
+    className="Window"
+    onClick={() => setZIndex(Date.now() - 1665313953561)}
+    key={key}
+    ref={ref}
+    style={{
+      position: "absolute",
+      height: hidden ? 0 : "auto",
+      overflow: "hidden",
+      top: posY,
+      left: posX,
+      backgroundColor: color,
+      display: "flex",
+      flexDirection: "column",
+      padding: "4px 8px",
+      zIndex,
+      boxShadow:
+        `${Math.random() > 0.5 ? "-" : ""}${Math.round(Math.random() * 5) + 2
+        }px ${Math.random() > 0.5 ? "-" : ""}${Math.round(Math.random() * 5) + 2
+        }px ` + color2,
+    }}
+  >
+    <div style={{ display: "flex" }}>
+      <div style={{ fontSize: 50 }}>{title}</div>
+      <div style={{ marginLeft: "auto" }}>
+        <Button text="X" onClick={() => { setClosed(true); if (addWindow) { addWindow() } }} />
+      </div>
+    </div>
+    <div
+      style={{
+        display: "flex",
+        padding: "16px 32px",
+        fontSize: 35,
+        maxWidth: 500,
+        textAlign: "center",
+      }}
+    >
+      <div>{media}</div>
+      <div>{message}</div>
+    </div>
+    {actions && (
+      <div style={{ marginLeft: "auto" }}>
+        {actions.map((action) => (
+          <Button
+            key={action}
+            text={action}
+            onClick={() => { setClosed(true); if (addWindow) { addWindow() } }}
+            style={{ marginLeft: 4 }}
+          />
+        ))}
+      </div>
+    )}
+  </div>
+
+
+  return closed ? null : (isMobile ? windowContent :
     <Draggable
       onMouseDown={() => { setZIndex(Date.now() - 1665313953561) }}
       key={key}
     >
-      <div
-        className="Window"
-        onClick={() => setZIndex(Date.now() - 1665313953561)}
-        key={key}
-        ref={ref}
-        style={{
-          position: "absolute",
-          height: hidden ? 0 : "auto",
-          overflow: "hidden",
-          top: posY,
-          left: posX,
-          backgroundColor: color,
-          display: "flex",
-          flexDirection: "column",
-          padding: "4px 8px",
-          zIndex,
-          boxShadow:
-            `${Math.random() > 0.5 ? "-" : ""}${Math.round(Math.random() * 5) + 2
-            }px ${Math.random() > 0.5 ? "-" : ""}${Math.round(Math.random() * 5) + 2
-            }px ` + color2,
-        }}
-      >
-        <div style={{ display: "flex" }}>
-          <div style={{ fontSize: 50 }}>{title}</div>
-          <div style={{ marginLeft: "auto" }}>
-            <Button text="X" onClick={() => setClosed(true)} />
-          </div>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            padding: "16px 32px",
-            fontSize: 35,
-            maxWidth: 500,
-            textAlign: "center",
-          }}
-        >
-          <div>{media}</div>
-          <div>{message}</div>
-        </div>
-        {actions && (
-          <div style={{ marginLeft: "auto" }}>
-            {actions.map((action) => (
-              <Button
-                key={action}
-                text={action}
-                onClick={() => setClosed(true)}
-                style={{ marginLeft: 4 }}
-              />
-            ))}
-          </div>
-        )}
-      </div>
+      {windowContent}
     </Draggable>
   );
 }
