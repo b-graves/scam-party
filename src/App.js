@@ -48,11 +48,10 @@ function Window(props) {
 
   const [zIndex, setZIndex] = useState(10);
 
-  const isMobile = toPX("100vw") < toPX("100vh");
 
   return closed ? null : (
     <Draggable
-      onMouseDown={() => { setZIndex(Date.now() - 1665313953561); if (addWindow && isMobile) addWindow() }}
+      onMouseDown={() => { setZIndex(Date.now() - 1665313953561) }}
       key={key}
     >
       <div
@@ -116,6 +115,9 @@ function App() {
   const [showVideo, setShowVideo] = useState(false);
 
   const videoRef = useRef();
+
+
+  const isMobile = toPX("100vw") < toPX("100vh");
 
   const ref = useRef();
   const [windowOne, setWindowOne] = useState(null)
@@ -225,11 +227,12 @@ function App() {
         hidden={!showVideo}
         key={6}
         media={
-          <video width="320" height="240" ref={videoRef}>
+          <video width="320" height="240" ref={videoRef} controls={isMobile}>
             <source src="/sb.mp4" type="video/mp4" />
           </video>
         }
       />
+      {isMobile && extraWindows}
       {windows}
       {windowOne}
       {windowTwo}
