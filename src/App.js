@@ -48,12 +48,11 @@ function Window(props) {
 
   const [zIndex, setZIndex] = useState(10);
 
-
+  const isMobile = toPX("100vw") < toPX("100vh");
 
   return closed ? null : (
     <Draggable
-      // onMouseDown={() => { setZIndex(Date.now() - 1665313953561); if (addWindow && isMobile) addWindow() }}
-      onMouseDown={() => { setZIndex(Date.now() - 1665313953561); }}
+      onMouseDown={() => { setZIndex(Date.now() - 1665313953561); if (addWindow && isMobile) addWindow() }}
       key={key}
     >
       <div
