@@ -48,7 +48,7 @@ function Window(props) {
 
   const [zIndex, setZIndex] = useState(10);
 
-  const isMobile = navigator.userAgentData.mobile;
+
 
   return closed ? null : (
     <Draggable
