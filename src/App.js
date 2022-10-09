@@ -9,6 +9,7 @@ const PAGE_HEIGHT = toPX("100vh");
 const PAGE_WIDTH = toPX("100vw");
 
 function useMountEffect(effect) {
+
   return useEffect(effect, []);
 }
 
@@ -30,7 +31,7 @@ function Window(props) {
 
   const ref = useRef(null);
 
-  const [posX, setPosX] = useState(0);
+  const [posX, setPosX] = useState(Math.random() * (PAGE_WIDTH));
 
   const [color] = useState(colors[Math.floor(Math.random() * colors.length)]);
   const color2 = colors[Math.floor(Math.random() * colors.length)];
@@ -39,7 +40,7 @@ function Window(props) {
     setPosX(Math.random() * (PAGE_WIDTH - ref.current?.clientWidth));
   }, [ref.current?.clientWidth]);
 
-  const [posY, setPosY] = useState(0);
+  const [posY, setPosY] = useState(Math.random() * (PAGE_HEIGHT));
 
   useEffect(() => {
     setPosY(Math.random() * (PAGE_HEIGHT - ref.current?.clientHeight));
@@ -55,6 +56,7 @@ function Window(props) {
       <div
         className="Window"
         onClick={() => setZIndex(Date.now() - 1665313953561)}
+        key={key}
         ref={ref}
         style={{
           position: "absolute",
@@ -160,6 +162,20 @@ function App() {
 
   const ref = useRef();
 
+
+  const [windowOne, setWindowOne] = useState(null)
+  const [windowTwo, setWindowTwo] = useState(null)
+  const [windowThree, setWindowThree] = useState(null)
+  const [windowFour, setWindowFour] = useState(null)
+  const [windowFive, setWindowFive] = useState(null)
+  const [windowSix, setWindowSix] = useState(null)
+  const [windowSeven, setWindowSeven] = useState(null)
+  const [windowEight, setWindowEight] = useState(null)
+  const [windowNine, setWindowNine] = useState(null)
+  const [windowTen, setWindowTen] = useState(null)
+
+  const setWindowOptions = [setWindowOne, setWindowTwo, setWindowThree, setWindowFour, setWindowFive, setWindowSix, setWindowSeven, setWindowEight, setWindowNine, setWindowTen];
+
   useMountEffect(() => {
     const addWindow = () => {
       if (!document.hasFocus()) return;
@@ -172,13 +188,16 @@ function App() {
         Math.random() > 0.5
           ? coreWindows[Math.floor(Math.random() * coreWindows.length)]
           : extraWindows[Math.floor(Math.random() * extraWindows.length)];
-      setMoreWindows([...moreWindows, randomWindow]);
+
+      const setWindow = setWindowOptions[Math.floor(Math.random() * setWindowOptions.length)]
+      setWindow(randomWindow);
     };
     setInterval(() => addWindow(), 5000);
     if (videoRef.current) {
       videoRef.current.play();
     }
   });
+
 
   return (
     <div className="App" style={{ height: "100vh", width: "100vw" }} ref={ref}>
@@ -192,7 +211,16 @@ function App() {
         }
       />
       {windows}
-      {moreWindows}
+      {windowOne}
+      {windowTwo}
+      {windowThree}
+      {windowFour}
+      {windowFive}
+      {windowSix}
+      {windowSeven}
+      {windowEight}
+      {windowNine}
+      {windowTen}
     </div>
   );
 }
