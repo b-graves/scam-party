@@ -65,6 +65,7 @@ function Window(props) {
       display: "flex",
       flexDirection: "column",
       padding: "4px 8px",
+      maxWidth: "80vw",
       zIndex,
       boxShadow:
         `${Math.random() > 0.5 ? "-" : ""}${Math.round(Math.random() * 5) + 2
@@ -83,7 +84,7 @@ function Window(props) {
         display: "flex",
         padding: "16px 32px",
         fontSize: 35,
-        maxWidth: 500,
+
         textAlign: "center",
       }}
     >
@@ -138,6 +139,7 @@ function App() {
   const setWindowOptions = [setWindowOne, setWindowTwo, setWindowThree, setWindowFour, setWindowFive, setWindowSix, setWindowSeven, setWindowEight, setWindowNine, setWindowTen];
 
   const extraWindows = [
+
     <Window
       key={4}
       title={"YOU NEED FLASH FOR THIS PARTY"}
