@@ -9,7 +9,6 @@ const PAGE_HEIGHT = toPX("100vh");
 const PAGE_WIDTH = toPX("100vw");
 
 function useMountEffect(effect) {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   return useEffect(effect, []);
 }
 
@@ -19,6 +18,7 @@ function Button({ text, onClick }) {
       <p>{text}</p>
     </div>
   );
+
 }
 
 function Window(props) {
