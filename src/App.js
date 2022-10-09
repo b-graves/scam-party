@@ -8,6 +8,11 @@ import Draggable from "react-draggable";
 const PAGE_HEIGHT = toPX("100vh");
 const PAGE_WIDTH = toPX("100vw");
 
+function useMountEffect(effect) {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  return useEffect(effect, []);
+}
+
 function Button({ text, onClick }) {
   return (
     <div className="pixel" onClick={() => onClick()}>
@@ -145,7 +150,7 @@ function App() {
     />,
   ];
 
-  const [windows, setWindows] = useState(coreWindows.reverse());
+  const [windows] = useState(coreWindows.reverse());
 
   const [showVideo, setShowVideo] = useState(false);
 
@@ -153,28 +158,27 @@ function App() {
 
   const videoRef = useRef();
 
-  const addWindow = () => {
-    if (!document.hasFocus()) return;
-    setShowVideo(true);
-    if (videoRef.current) {
-      videoRef.current.play();
-    }
-
-    const randomWindow =
-      Math.random() > 0.5
-        ? coreWindows[Math.floor(Math.random() * coreWindows.length)]
-        : extraWindows[Math.floor(Math.random() * extraWindows.length)];
-    setMoreWindows([...moreWindows, randomWindow]);
-  };
-
   const ref = useRef();
 
-  useEffect(() => {
+  useMountEffect(() => {
+    const addWindow = () => {
+      if (!document.hasFocus()) return;
+      setShowVideo(true);
+      if (videoRef.current) {
+        videoRef.current.play();
+      }
+
+      const randomWindow =
+        Math.random() > 0.5
+          ? coreWindows[Math.floor(Math.random() * coreWindows.length)]
+          : extraWindows[Math.floor(Math.random() * extraWindows.length)];
+      setMoreWindows([...moreWindows, randomWindow]);
+    };
     setInterval(() => addWindow(), 5000);
     if (videoRef.current) {
       videoRef.current.play();
     }
-  }, []);
+  });
 
   return (
     <div className="App" style={{ height: "100vh", width: "100vw" }} ref={ref}>
