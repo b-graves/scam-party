@@ -52,7 +52,8 @@ function Window(props) {
 
   return closed ? null : (
     <Draggable
-      onMouseDown={() => { setZIndex(Date.now() - 1665313953561); if (addWindow && isMobile) addWindow() }}
+      // onMouseDown={() => { setZIndex(Date.now() - 1665313953561); if (addWindow && isMobile) addWindow() }}
+      onMouseDown={() => { setZIndex(Date.now() - 1665313953561); }}
       key={key}
     >
       <div
