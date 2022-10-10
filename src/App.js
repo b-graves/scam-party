@@ -87,7 +87,7 @@ function Window(props) {
         display: "flex",
         padding: "16px 32px",
         fontSize: 35,
-
+        maxWidth: 400,
         textAlign: "center",
       }}
     >
@@ -226,7 +226,7 @@ function App() {
       const setWindow = setWindowOptions[Math.floor(Math.random() * setWindowOptions.length)]
       setWindow(randomWindow);
     };
-    setInterval(() => addWindow(), 5000);
+    setInterval(() => addWindow(), 10000);
     if (videoRef.current) {
       videoRef.current.play();
     }
