@@ -76,7 +76,10 @@ function Window(props) {
     <div style={{ display: "flex" }}>
       <div style={{ fontSize: 50 }}>{title}</div>
       <div style={{ marginLeft: "auto" }}>
-        <Button text="X" onClick={() => { setClosed(true); if (addWindow) { addWindow() } }} />
+        <Button text="X" onClick={() => {
+          setClosed(true); if (addWindow) { addWindow() }
+          else { setTimeout(() => setClosed(false), Math.round(Math.random() * 90000)) }
+        }} />
       </div>
     </div>
     <div
@@ -97,7 +100,10 @@ function Window(props) {
           <Button
             key={action}
             text={action}
-            onClick={() => { setClosed(true); if (addWindow) { addWindow() } }}
+            onClick={() => {
+              setClosed(true); if (addWindow) { addWindow() }
+              else { setTimeout(() => setClosed(false), Math.round(Math.random() * 90000)) }
+            }}
             style={{ marginLeft: 4 }}
           />
         ))}
