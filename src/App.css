@@ -3,7 +3,7 @@
   background-color: #282c34;
   color: black;
   font-family: "VT323";
-  cursor: url("/public/big-free-hand-cursor-transparent-33.png"), pointer;
+  /* cursor: url(glitzy-cursor.png), auto; */
 }
 
 .App-logo {
@@ -68,8 +68,6 @@ button {
   display: inline-block;
   vertical-align: top;
   text-transform: uppercase;
-
-  cursor: pointer;
 
   -webkit-touch-callout: none;
   -webkit-user-select: none;
