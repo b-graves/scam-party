@@ -15,7 +15,7 @@ function useMountEffect(effect) {
 
 function Button({ text, onClick }) {
   return (
-    <div style={{ cursor: 'url(/glitzy-cursor.png),auto' }} className="pixel" onClick={() => onClick()}>
+    <div style={{ cursor: 'url(/glitzy-cursor.png),pointer' }} className="pixel" onClick={() => onClick()}>
       <p>{text}</p>
     </div >
   );
@@ -234,7 +234,7 @@ function App() {
 
 
   return (
-    <div className="App" style={{ height: "100vh", width: "100vw", cursor: 'url(/glitzy-cursor.png),auto' }} ref={ref}>
+    <div className="App" style={{ height: "100vh", width: "100vw", cursor: 'url(/glitzy-cursor.png),pointer' }} ref={ref}>
       <Window
         hidden={!showVideo}
         key={6}
