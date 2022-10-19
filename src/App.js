@@ -145,7 +145,11 @@ function App() {
   const setWindowOptions = [setWindowOne, setWindowTwo, setWindowThree, setWindowFour, setWindowFive, setWindowSix, setWindowSeven, setWindowEight, setWindowNine, setWindowTen];
 
   const extraWindows = [
-
+    <Window
+      key={100}
+      message="POSTPONED UNTIL FURTHER NOTICE"
+      actions={["#DISAPPOINTED", "THIS IS BAD NEWS"]}
+    />,
     <Window
       key={4}
       title={"YOU NEED FLASH FOR THIS PARTY"}
@@ -184,7 +188,14 @@ function App() {
     <Window
       addWindow={addWindow}
       key={0}
-      message="Are you free on Saturday 22nd October at 7:30pm?"
+      message="POSTPONED UNTIL FURTHER NOTICE"
+      actions={["#DISAPPOINTED", "THIS IS BAD NEWS"]}
+
+    />,
+    <Window
+      addWindow={addWindow}
+      key={0}
+      message="Are you free on XXX XXX XXX at XXX?"
       actions={["YES", "OKAY"]}
 
     />,
@@ -202,6 +213,12 @@ function App() {
       title={"Local parties in your area"}
       message={`We found ONE good party in London (UK). Located at Flat 8 35 Hawley Road`}
       actions={["I AM INTERESTED"]}
+    />,
+    <Window
+      addWindow={addWindow}
+      key={0}
+      message="POSTPONED UNTIL FURTHER NOTICE"
+      actions={["#DISAPPOINTED", "THIS IS BAD NEWS"]}
     />,
   ];
 
