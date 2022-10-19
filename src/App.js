@@ -201,11 +201,25 @@ function App() {
     />,
     <Window
       addWindow={addWindow}
+      key={0}
+      message="POSTPONED UNTIL FURTHER NOTICE"
+      actions={["#DISAPPOINTED", "THIS IS BAD NEWS"]}
+
+    />,
+    <Window
+      addWindow={addWindow}
       key={1}
       title={"CONGRATULATIONS"}
       message={`YOU are the ${1000000 + Math.round(Math.random() * 1000000)
         }th person invited to this PARTY`}
       actions={["CLAIM YOUR PRIZE(S)"]}
+    />,
+    <Window
+      addWindow={addWindow}
+      key={0}
+      message="POSTPONED UNTIL FURTHER NOTICE"
+      actions={["#DISAPPOINTED", "THIS IS BAD NEWS"]}
+
     />,
     <Window
       addWindow={addWindow}
